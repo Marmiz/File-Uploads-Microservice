@@ -16,3 +16,6 @@ yarn-error.log*
 
 # Dependency directories
 node_modules/
+
+# Uploaded files for testing
+uploads/
