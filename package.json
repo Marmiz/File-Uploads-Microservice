@@ -1,0 +1,15 @@
+{
+  "name": "File_Metadata_Microservice",
+  "version": "1.0.0",
+  "description": "a small program that return the size of an uploaded file",
+  "main": "server.js",
+  "author": "marmiz",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.2",
+    "multer": "^1.3.0"
+  },
+  "scripts": {
+    
+  }
+}
