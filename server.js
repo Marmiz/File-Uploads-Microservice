@@ -1,8 +1,20 @@
 /*jshint esversion: 6 */
 var express = require('express');
-var app =express();
+var app = express();
+var bodyParser = require('body-parser');
 var multer  = require('multer');
-var upload = multer({ dest: 'uploads/' });
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/');
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+var upload = multer({ storage: storage });
+
+var fs = require('fs');
 
 
 // set port
@@ -10,6 +22,8 @@ app.set('port', (process.env.PORT || 8000));
 
 
 app.use(express.static(__dirname + '/public'));
+
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', function(req, res){
   res.render('index.html');
@@ -20,11 +34,34 @@ app.get('/skills', function(req, res){
   res.send(['Vue', 'Axios']);
 });
 
+// GET uploaded -- send back list of file in uploaded folder
+app.get('/uploaded',function(req,res){
+  var storedFiles = [];
+  fs.readdir('uploads/', function(err, files){
+    files.forEach(function(file){
+      let path = 'uploads/'+file;
+      let size = Buffer.byteLength(fs.readFileSync(path));
+      let obj = {'name': file, 'size': size};
+      storedFiles.push(obj);
+    });
+    res.send(storedFiles);
+  });
+});
+
 // POST method route
 app.post('/uploads', upload.single('file'), function (req, res, next) {
-  console.log(req.file);
-  res.json({'size': req.file.size});
+  if(req.file){
+    console.log(req.file.path);
+    res.json({'size': req.file.size,
+              'name': req.file.originalname,
+              });
+  }
 
+});
+
+// DELETE from uploads
+app.post('/delete',function (req, res, next){
+  console.log(req.body);
 });
 
 // handles errors

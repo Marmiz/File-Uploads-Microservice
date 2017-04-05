@@ -9,10 +9,18 @@
 <body>
 
   <div id="app">
-      <ul>
-        <li v-for="skill in skills">{{skill}}</li>
-      </ul>
       <input type="file" name="upload" id="upBtn" @change="upload">
+      &nbsp;
+      <div v-if="!isEmpty(file)">
+        <p>size: {{convertSize(file.size)}} KB.</p>
+        <p>name: {{file.name}}</p>
+      </div>
+      &nbsp;
+      <h1>In Memory</h1>
+      <div v-if="!isEmpty(inMemory)" v-for="x in inMemory" >
+        <p>{{x.name}}</p><p>{{convertSize(x.size)}}  KB</p>
+        <button :id="x.name" @click="deleteDB($event.target.id)">delete</button>
+      </div>
   </div>
 
 

@@ -3,7 +3,8 @@ new Vue ({
   el: '#app',
 
   data: {
-    skills: []
+    file: {},
+    inMemory: []
   },
 
   methods: {
@@ -16,18 +17,39 @@ new Vue ({
         url: '/uploads',
         name: 'avatar',
         data: fd
-      });
+      })
+       .then(function(response){
+         this.file = response.data;
+         this.fetchUploaded();
+       }.bind(this));
+    },
+
+    fetchUploaded(){
+      axios.get('/uploaded')
+              .then(function(response){
+                this.inMemory = response.data;
+              }.bind(this));
+    },
+
+    deleteDB(file){
+      axios({
+        method: 'post',
+        url: '/uploads',
+        data: fd
+      })
+    },
+
+    isEmpty(obj){
+      return(Object.keys(obj).length === 0);
+    },
+
+    convertSize(s){
+      return parseInt(s/1000);
     }
   },
 
   mounted(){
-    //make an ajax requst to /skills
-      axios.get('/skills')
-              .then(function(response){
-                this.skills = response.data;
-              }.bind(this))
-              .catch(function(error){
-                console.log(error);
-              });
+    // fetch if somethin's in memory
+    this.fetchUploaded();
   }
 });
