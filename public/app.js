@@ -32,11 +32,15 @@ new Vue ({
     },
 
     deleteDB(file){
+      let df = {'delete': file};
       axios({
         method: 'post',
-        url: '/uploads',
-        data: fd
+        url: '/delete',
+        data: df
       })
+      .then(function(response){
+        if (response.status == 200) this.fetchUploaded();
+      }.bind(this));
     },
 
     isEmpty(obj){

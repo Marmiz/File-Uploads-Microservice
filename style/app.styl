@@ -1,0 +1,94 @@
+ametist = #9b59b6;
+clouds = #ecf0f1;
+silver = #bdc3c7;
+white = #fff;
+midnight = #2c3e50;
+asphalt = #34495e;
+concrete = #95a5a6
+
+//mixins
+fontsize(n)
+  font-size n
+
+
+// css
+body
+  position relative
+  bakground-color clouds
+  font-family Geneva, sans-serif
+  // height, width 100%
+
+input
+  margin-left: 20px
+  margin-top: 10px
+  font-size 16px
+  font-family: Geneva, sans-serif
+
+.heading
+  font-family Tahoma, sans-serif
+  fontsize(2em)
+  color midnight
+  margin-left: 20px
+
+.list
+  fontsize(1.2em)
+  color asphalt
+
+.btn
+  font-size 16px
+  position relative
+  padding-left 16px
+  padding-right 16px
+  vertical-align middle
+  text-transform uppercase
+  font-family Geneva, sans-serif
+  background-color ametist
+  color white
+  border none
+  border-radius: 4px
+
+.card
+  position relative
+  width 30vw
+  color  midnight
+  margin-left 20px
+  fontsize(1.2em)
+
+.ametist
+  color ametist
+
+.memContainer
+  display flex
+  flex-direction row
+  flex-wrap wrap
+  justify-content flex-start
+  align-items center
+
+.memList
+  flex-basis: 50%
+  min-width 35%
+
+.memContent
+  background-color: midnight
+  color: white
+  fontsize(1.2em)
+  display: inline-block;
+  min-width: 50%;
+  padding: 20px;
+  margin: 20px;
+  -webkit-box-shadow: 7px -7px 21px -4px rgba(189,195,199,1)
+  -moz-box-shadow: 7px -7px 21px -4px rgba(189,195,199,1)
+  box-shadow: 7px -7px 21px -4px rgba(189,195,199,1)
+
+.btnSeparator
+  padding: 10px;
+  text-align: center;
+
+.header
+  margin-top 30px
+
+.footer
+  fontsize(2em)
+  color midnight
+  margin-top: 100px
+  margin-left: 20px

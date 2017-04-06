@@ -2,6 +2,7 @@
 var express = require('express');
 var app = express();
 var bodyParser = require('body-parser');
+var stylus = require('stylus');
 var multer  = require('multer');
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -20,10 +21,17 @@ var fs = require('fs');
 // set port
 app.set('port', (process.env.PORT || 8000));
 
-
+app.use(stylus.middleware({
+  src: __dirname + '/style',
+  dest: __dirname + '/public',
+  debug: true,
+}));
 app.use(express.static(__dirname + '/public'));
 
+
 app.use(bodyParser.urlencoded({ extended: false }));
+// parse application/json
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
   res.render('index.html');
@@ -61,7 +69,12 @@ app.post('/uploads', upload.single('file'), function (req, res, next) {
 
 // DELETE from uploads
 app.post('/delete',function (req, res, next){
-  console.log(req.body);
+  let path = 'uploads/'+req.body.delete;
+  fs.unlink(path, (err) => {
+  if (err) throw err;
+  res.json({'deleted': req.body.delete});
+});
+
 });
 
 // handles errors

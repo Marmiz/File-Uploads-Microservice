@@ -5,22 +5,43 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>File Metadata Microservice</title>
+
+  <link rel="stylesheet" href="app.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
   <div id="app">
+    <div class="header">
       <input type="file" name="upload" id="upBtn" @change="upload">
-      &nbsp;
-      <div v-if="!isEmpty(file)">
-        <p>size: {{convertSize(file.size)}} KB.</p>
-        <p>name: {{file.name}}</p>
+    </div>
+
+      <div class="card" v-show="!isEmpty(file)">
+        <p><span class="ametist">size</span> {{convertSize(file.size)}} KB.</p>
+        <p><span class="ametist">name</span> {{file.name}}</p>
       </div>
-      &nbsp;
-      <h1>In Memory</h1>
-      <div v-if="!isEmpty(inMemory)" v-for="x in inMemory" >
-        <p>{{x.name}}</p><p>{{convertSize(x.size)}}  KB</p>
-        <button :id="x.name" @click="deleteDB($event.target.id)">delete</button>
-      </div>
+
+      <h1 class="heading">In Memory</h1>
+      <div class="memContainer">
+        <div v-if="isEmpty(inMemory)" class="card">
+          <p class="list">Looks like there's no file saved in memory</p>
+        </div>
+        <div class="memList" v-else v-for="x in inMemory" >
+          <div class="memContent">
+            <p>{{x.name}}</p><p>{{convertSize(x.size)}}  KB</p>
+            <div class="btnSeparator">
+            <button class="btn" :id="x.name" @click="deleteDB($event.target.id)">delete</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="footer">
+      <i class="fa fa-code" aria-hidden="true"></i> with
+      <i class="fa fa-heart" aria-hidden="true"></i> and
+      <i class="fa fa-coffee" aria-hidden="true"></i>
+    </div>
+
   </div>
 
 
