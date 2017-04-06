@@ -18,4 +18,5 @@ yarn-error.log*
 node_modules/
 
 # Uploaded files for testing
-uploads/
+uploads/*
+!uploads/.gitkeep 
