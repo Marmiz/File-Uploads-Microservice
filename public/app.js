@@ -39,7 +39,12 @@ new Vue ({
         data: df
       })
       .then(function(response){
-        if (response.status == 200) this.fetchUploaded();
+        if (response.status == 200) {
+          this.fetchUploaded();
+          // reset the form and the result
+          this.$refs.form.reset();
+          this.file = {};
+        }
       }.bind(this));
     },
 

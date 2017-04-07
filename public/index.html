@@ -13,7 +13,9 @@
 
   <div id="app">
     <div class="header">
-      <input type="file" name="upload" id="upBtn" @change="upload">
+      <form ref="form">
+        <input type="file" name="upload" id="upBtn" @change="upload">
+      </form>
     </div>
 
       <div class="card" v-show="!isEmpty(file)">
