@@ -4,6 +4,11 @@ A small API server that lets you uploads and delete file directly from the front
 
 Made as study prject starting from freecodecamp's [file metadata microservice](https://www.freecodecamp.com/challenges/file-metadata-microservice) challenge and improved with extra functionality :sparkles:
 
+A demo for this project lives on glitch.
+
+Discover it at
+ https://file-uploads-microservice.glitch.me
+
 ----
 ### How it works
 
